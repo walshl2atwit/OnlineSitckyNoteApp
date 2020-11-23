@@ -19,6 +19,7 @@ public class Main extends Application {
 	static public Scene scene = null;
 	static public ArrayList<Note> notes = new ArrayList<Note>();
 	static public VBox root;
+	static public NoteSaver saver;
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException{
@@ -39,7 +40,12 @@ public class Main extends Application {
 	@Override
 	public void stop() {
 		System.out.println("--Exiting program--");
-		SavingNotes.saveNotes(notes);
+		
+		try {
+			saver.saveNotes(notes);
+		} catch (Exception e) {
+			System.out.println("--FAILED TO SAVE NOTES--");
+		}
 		Platform.exit();
 	}
 }

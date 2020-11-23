@@ -21,8 +21,9 @@ public class SampleController extends Main {
     @FXML
     public GridPane gridPane;
     
-    public void initialize() {
-    	notes = SavingNotes.getNotesFromFile();
+    public void initialize() throws Exception {
+    	Main.saver = new NoteSaver("tempName");
+    	notes = Main.saver.downloadNotes();
     	if (notes.isEmpty() == false) {
 	    	for (int i = 0; i < notes.size(); i++) {
 				gridPane.add(Note.createTextArea(notes.get(i)), i % 3, i / 3);
