@@ -44,7 +44,7 @@ public class Main extends Application {
 		try {
 			saver.saveNotes(notes);
 		} catch (Exception e) {
-			System.out.println("--FAILED TO SAVE NOTES--");
+			System.out.println("--Failed to save notes--");
 		}
 		Platform.exit();
 	}

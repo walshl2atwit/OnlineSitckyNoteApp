@@ -6,65 +6,49 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Server{
-	
-	static ArrayList<Thread> threads = new ArrayList<Thread>();
-	static ArrayList<ClientHandler> clients = new ArrayList<ClientHandler>();
 	static File savedNotes = new File("savedNotes.txt");
 	
-		private static class ClientHandler implements Runnable{
-		
-			Socket socket;
-			public ClientHandler(Socket socket)
-			{
-				this.socket = socket;
+	private static class ClientHandler implements Runnable {
+		Socket socket;
+		public ClientHandler(Socket socket) {
+			this.socket = socket;
+		}
+		@Override
+		public void run() {
+			try {
+				process();
+			} catch (Exception e) {
+				
 			}
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				try {
-					process();
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-			}
+		}
 		
+		private void process() throws Exception{
+			// Get a reference to the socket's input and output streams.
+			InputStream is = socket.getInputStream();
+			DataOutputStream os = new DataOutputStream(socket.getOutputStream());
 
-
-		
-
-	private void process() throws Exception{
-		InputStream is = socket.getInputStream();
-		DataOutputStream os = new DataOutputStream(socket.getOutputStream());
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		
-		ArrayList<String> list = new ArrayList<>();
-		while(true)
-		{
+			// Set up input stream filters.
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			String clientMessage = br.readLine();
-			System.out.println("Received: " + clientMessage);
-			list.add(clientMessage);
-			sendToClients(clientMessage);
+			if (clientMessage.split("/")[0].equals("GET")) {
+				String response = "";
+				
+				Scanner s = new Scanner(savedNotes);
+				if (s.hasNext()) {
+					response += s.nextLine() + "\r\n\r\n";
+				} else {
+					response += "\r\n\r\n";
+				}
+				os.writeBytes(response);
+				
+			} else if (clientMessage.split("/")[0].equals("SEND")) {
+				clientMessage = clientMessage.replace("SEND/", "");
+				PrintWriter out = new PrintWriter(new FileWriter(savedNotes));
+				out.print(clientMessage);
+				out.close();
+			}
 		}
-	}
-
-}
-		
-	private static void log(String note) throws IOException {
-		Scanner s = new Scanner(savedNotes);
-		BufferedWriter writer = new BufferedWriter(new FileWriter(savedNotes, true));
-		writer.write(note + "\n ;;; \n");
-		writer.close();
-	}
-	
-	private static void sendToClients(String message) throws IOException{
-		for(int i =0; i < clients.size(); i++)
-		{
-			DataOutputStream os = new DataOutputStream(clients.get(i).socket.getOutputStream());
-			os.writeBytes(message);
-		}
-	}
-		
+	}	
 	public static void main(String[] args) throws Exception{
 		
 		ServerSocket serverSocket = new ServerSocket(1234);
@@ -75,11 +59,10 @@ public class Server{
 		{
 			Socket connectionSocket = serverSocket.accept();			
 			ClientHandler client = new ClientHandler(connectionSocket);			
-			clients.add(client);
 			Thread thread = new Thread(client);
-			threads.add(thread);
 			thread.start();
 		}
 		
 	}
 }
+

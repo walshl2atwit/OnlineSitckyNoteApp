@@ -25,7 +25,13 @@ public class NoteSaver {
 		DataOutputStream os = new DataOutputStream(socket.getOutputStream());
 		BufferedReader is = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		
+		System.out.println("--Saving notes to server--");
+		
 		String notesSendMessage = "SEND/";
+		for (int i = 0; i < a.size(); i++) {
+			notesSendMessage += a.get(i).getMessage() + ";;;";
+		}
+		os.writeBytes(notesSendMessage + "\r\n\r\n");
 		
 	}
 	
@@ -36,16 +42,21 @@ public class NoteSaver {
 		DataOutputStream os = new DataOutputStream(socket.getOutputStream());
 		BufferedReader is = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		
+		System.out.println("--Requesting notes from server--");
+		
 		// Request from server
 		String noteRequestMessage = "GET/" + "\r\n\r\n";
+		os.writeBytes(noteRequestMessage);
 		
 		// Note contents from server
 		String[] noteStrings = is.readLine().split(";;;");	// Contents of all the notes split into array
+		System.out.println("--Received notes from server--");
 		ArrayList<Note> a = new ArrayList<Note>();		// All the notes in one collection
 		for (int i = 0; i < noteStrings.length; i++) {
 			a.add(new Note(noteStrings[i]));
 		}
-		
+		os.close();
+		is.close();
 		return a;
 	}
 }
