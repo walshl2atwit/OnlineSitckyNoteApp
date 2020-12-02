@@ -22,7 +22,7 @@ public class SampleController extends Main {
     public GridPane gridPane;
     
     public void initialize() throws Exception {
-    	Main.saver = new NoteSaver("tempName");
+    	Main.saver = new NoteSaver(Main.clientName);
     	notes = Main.saver.downloadNotes();
     	if (notes.isEmpty() == false) {
 	    	for (int i = 0; i < notes.size(); i++) {

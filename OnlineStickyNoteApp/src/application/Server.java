@@ -31,6 +31,7 @@ public class Server{
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			String clientMessage = br.readLine();
 			if (clientMessage.split("/")[0].equals("GET")) {
+				System.out.println(clientMessage.split("/")[1] + " requested download...");
 				String response = "";
 				
 				Scanner s = new Scanner(savedNotes);

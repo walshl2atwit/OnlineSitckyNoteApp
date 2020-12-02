@@ -27,7 +27,7 @@ public class NoteSaver {
 		
 		System.out.println("--Saving notes to server--");
 		
-		String notesSendMessage = "SEND/";
+		String notesSendMessage = "SEND/" + clientName + "/";
 		for (int i = 0; i < a.size(); i++) {
 			notesSendMessage += a.get(i).getMessage() + ";;;";
 		}
@@ -45,7 +45,7 @@ public class NoteSaver {
 		System.out.println("--Requesting notes from server--");
 		
 		// Request from server
-		String noteRequestMessage = "GET/" + "\r\n\r\n";
+		String noteRequestMessage = "GET/" + clientName + "/\r\n\r\n";
 		os.writeBytes(noteRequestMessage);
 		
 		// Note contents from server
