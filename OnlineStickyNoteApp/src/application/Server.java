@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Server {
 	
+    //map is currently unused
 	static Map<String, File> users = new HashMap<String, File>();
 	static String username;
 	
@@ -35,12 +36,15 @@ public class Server {
 			// Set up input stream filters.
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			String clientMessage = br.readLine();
+			//create username variable to make things easier
 			username = clientMessage.split("/")[1];
-			File savedNotes = new File("C:\\Users\\Jonathan Bernardi\\git\\OnlineSitckyNoteApp\\OnlineStickyNoteApp\\" + username + "_savedNotes.txt");
+			//creates new file in specified location with username
+			File savedNotes = new File("C:\\Users\\bernardij\\git\\OnlineSitckyNoteApp\\OnlineStickyNoteApp\\" + username + "_savedNotes.txt");
 			
 			if (clientMessage.split("/")[0].equals("GET")) {
 				System.out.println(clientMessage.split("/")[1] + " requested download...");
 				
+				//checks if file already exists
 				if(savedNotes.exists())
 				{
 					String response = "";
@@ -54,7 +58,7 @@ public class Server {
 					}
 					os.writeBytes(response);
 					
-				}
+				}//if file doesn't exist, then it creates a new one associated with that user
 				else 
 				{
 					try {
@@ -81,7 +85,9 @@ public class Server {
 				
 				
 			} else if (clientMessage.split("/")[0].equals("SEND")) {
-				clientMessage = clientMessage.replace("SEND/", "");
+			    //added username removal
+				clientMessage = clientMessage.replace("SEND/" + username + "/", "");
+				
 				
 
 				try {

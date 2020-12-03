@@ -31,7 +31,7 @@ public class Main extends Application {
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.getIcons().add(new Image("file:noteIcon.png"));
-		primaryStage.setTitle(clientName + "'s Notes");
+		primaryStage.setTitle(clientName + "'s Notes"); //added clients name to title
 		primaryStage.show();
 		primaryStage.setResizable(false);
 	}
