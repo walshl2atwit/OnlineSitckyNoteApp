@@ -21,6 +21,9 @@ public class SampleController extends Main {
     @FXML
     public GridPane gridPane;
     
+    @FXML
+    public Button saveNoteBtn;
+    
     public void initialize() throws Exception {
     	Main.saver = new NoteSaver(Main.clientName);
     	notes = Main.saver.downloadNotes();
@@ -65,6 +68,15 @@ public class SampleController extends Main {
     			}
     		}
     	}
+    }
+    
+    @FXML
+    void saveNotes(ActionEvent event) {
+    	try {
+			Main.saver.saveNotes(notes);
+		} catch (Exception e) {
+			System.out.println("--Failed to save notes--");
+		}
     }
 
 }

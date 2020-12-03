@@ -44,11 +44,12 @@ public class Main extends Application {
 	public void stop() {
 		System.out.println("--Exiting program--");
 		
-		try {
+		/*try {
 			saver.saveNotes(notes);
 		} catch (Exception e) {
 			System.out.println("--Failed to save notes--");
-		}
+		}*/
+		
 		Platform.exit();
 	}
 	

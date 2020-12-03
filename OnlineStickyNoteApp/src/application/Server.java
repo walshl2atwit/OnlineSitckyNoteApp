@@ -39,7 +39,7 @@ public class Server {
 			//create username variable to make things easier
 			username = clientMessage.split("/")[1];
 			//creates new file in specified location with username
-			File savedNotes = new File("C:\\Users\\bernardij\\git\\OnlineSitckyNoteApp\\OnlineStickyNoteApp\\" + username + "_savedNotes.txt");
+			File savedNotes = new File(username + "_savedNotes.txt");
 			
 			if (clientMessage.split("/")[0].equals("GET")) {
 				System.out.println(clientMessage.split("/")[1] + " requested download...");

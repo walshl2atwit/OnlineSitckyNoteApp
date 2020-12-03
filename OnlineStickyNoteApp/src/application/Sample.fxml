@@ -27,7 +27,7 @@
     </MenuBar>
     <AnchorPane cacheShape="false" centerShape="false" maxHeight="-1.0" maxWidth="-1.0" prefHeight="500.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
       <children>
-            <TextField fx:id="noteMessage" prefHeight="43.0" prefWidth="605.0" promptText="Enter notes here..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="44.799999999999955">
+            <TextField fx:id="noteMessage" layoutX="76.0" prefHeight="43.0" prefWidth="529.0" promptText="Enter notes here..." AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="45.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -55,6 +55,7 @@
                   </GridPane>
                </content>
             </ScrollPane>
+            <Button fx:id="saveNoteBtn" mnemonicParsing="false" onAction="#saveNotes" prefHeight="43.0" prefWidth="77.0" text="Save Notes" textAlignment="CENTER" />
       </children>
     </AnchorPane>
   </children>
