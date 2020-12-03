@@ -52,8 +52,12 @@ public class NoteSaver {
 		String[] noteStrings = is.readLine().split(";;;");	// Contents of all the notes split into array
 		System.out.println("--Received notes from server--");
 		ArrayList<Note> a = new ArrayList<Note>();		// All the notes in one collection
+		
 		for (int i = 0; i < noteStrings.length; i++) {
-			a.add(new Note(noteStrings[i]));
+		    //check if array is empty  to not add an empty note to start
+		    if(noteStrings[i].isEmpty())		     
+		        continue;
+		    a.add(new Note(noteStrings[i]));
 		}
 		os.close();
 		is.close();
