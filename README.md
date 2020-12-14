@@ -15,23 +15,23 @@ An easy to use Sticky Note Application developed in Eclipse using Java and JavaF
 
 2. Clone this repository within Eclipse
 ```
-https://github.com/walshl2atwit/OnlineSitckyNoteApp.git
+  > https://github.com/walshl2atwit/OnlineSitckyNoteApp.git
 ```
   
 3. Right click on file within Eclipse and configure build path
 ```
-  *Make sure that javaFX .jars are located in the buildpath from your computer
+  > Make sure that javaFX .jars are located in the buildpath from your computer
 ```
   
 ### Running the Application
 1. Within Eclipse, run Server.java 
 ```
-  *Make sure this is done first or application won't run as intended
+  > Make sure this is done first or application won't run as intended
 ```
 
 2. Navigate to Main.java, then run Main.java to start application
 ```
-  If you wish to create multiple windows with multiple users, you can run Main.java again for each user
+  > If you wish to create multiple windows with multiple users, you can run Main.java again for each user
 ```
 ## Demo Video
 (insert link here)
