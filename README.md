@@ -34,7 +34,7 @@ An easy to use Sticky Note Application developed in Eclipse using Java and JavaF
   > If you wish to create multiple windows with multiple users, you can run Main.java again for each user
 ```
 ## Demo Video
-(insert link here)
+https://youtu.be/3u0A0Z1PcaI
 
 ## Contributers
 - Liam Walsh, Team Lead/Developer
